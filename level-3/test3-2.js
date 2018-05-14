@@ -7,11 +7,16 @@ function functionator(str) {
 function setMethod(arr) {
 	if(arr[0]) {
 		return {
-			[arr[0]]: () => (arr[1] ? setMethod(arr.slice(1)) : {})
+			[arr[0]]: function () {
+				if(arr[1]) {
+					return setMethod(arr.slice(1))
+				} else {
+					return {};
+				}
+			}
 		}
 	}
 
 	return {}
 }
 
-var a = functionator('hello some cool person')
